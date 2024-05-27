@@ -50,7 +50,7 @@ class CertificadosExport implements FromArray, ShouldAutoSize, WithStyles, WithC
 
         $array[] =  [
             'tipo_documento', 'documento', 'primer nombre', 'segundo nombre', 'primer apellido', 'segundo apellido', 'genero', 'pais nacimiento', 
-            'fecha nacimiento', 'nivel educativo', 'area de trabajo', 'cargo actual', 'sector', 'empleador', 'arl'
+            'fecha nacimiento', 'nivel educativo', 'area de trabajo', 'cargo actual', 'sector', 'empleador', 'arl', 'Curso', 'Creado por', 'Fecha'
         ];
 
         $Certificados = Certificados::where('deleted', 0)
@@ -80,6 +80,9 @@ class CertificadosExport implements FromArray, ShouldAutoSize, WithStyles, WithC
                     'sector'            => $item->aliado->sector->name,
                     'empleador'         => $item->aliado->name,
                     'arl'               => $item->aliado->arl_name,
+                    'Curso'             => $item->course_name,
+                    'Creado por'        => $item->usuario->name . ' ' . $item->usuario->last_name,
+                    'Fecha'             => $item->updated_at
                 );
 
 
