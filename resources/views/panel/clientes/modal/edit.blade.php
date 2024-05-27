@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{ __('Editar asesor') }}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ __('Editar cliente') }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -81,11 +81,15 @@
                         @enderror
                     </div>
                     
-                    <div class="col-md-6 col-12 mb-2">
+                   <div class="col-md-6 col-12 mb-2">
                         <span class="mb-1">{{ __('Pais de nacimiento') }}</span>
-                        <input type="text"
-                            class="form-control @error('countryOfBirth') is-invalid @enderror"wire:model.defer="countryOfBirth"
-                            wire:target="store" wire:loading.attr="disabled">
+                        <select class="form-control @error('countryOfBirth') is-invalid @enderror"wire:model.defer="countryOfBirth" 
+                                wire:target="store" wire:loading.attr="disabled">
+                            @foreach ($this->Countries as $countrie)
+                                <option value="{{ $countrie->name }}">{{ $countrie->name }}</option>
+                            @endforeach
+                        </select>
+                     
                         @error('countryOfBirth')
                             <div class="invalid-feedback ">{{ $message }} </div>
                         @enderror
@@ -146,9 +150,21 @@
 
                     <div class="col-md-6 col-12 mb-2">
                         <span class="mb-1">{{ __('Nivel de educación') }}</span>
-                        <input type="text"
-                            class="form-control @error('educationLevel') is-invalid @enderror"wire:model.defer="educationLevel"
-                            wire:target="store" wire:loading.attr="disabled">
+                        <select  class="form-control @error('educationLevel') is-invalid @enderror"wire:model.defer="educationLevel"
+                            wire:target="store" wire:loading.attr="disabled">                        
+                            <option value="">{{ __('Seleccione una opcion') }}</option>
+                            <option value="Sin educación">Sin educación</option>
+                            <option value="Preescolar">Preescolar</option>
+                            <option value="Primaria">Primaria</option>
+                            <option value="Secundaria">Secundaria </option>
+                            <option value="Bachillerato">Bachillerato</option>
+                            <option value="Educación técnica o profesional">Educación técnica</option>
+                            <option value="Educación universitaria">Educación universitaria</option>
+                            <option value="Postgrado">Postgrado</option>
+                            <option value="Formación profesional">Formación profesional</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+
                         @error('educationLevel')
                             <div class="invalid-feedback ">{{ $message }} </div>
                         @enderror

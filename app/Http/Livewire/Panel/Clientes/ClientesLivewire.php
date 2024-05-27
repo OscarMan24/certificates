@@ -10,6 +10,7 @@ use App\Models\Asesores;
 use App\Models\Clientes;
 use Livewire\WithPagination;
 use App\Exports\ClienteExport;
+use App\Models\Countries;
 use App\Models\TiposDocumentos;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -329,5 +330,10 @@ class ClientesLivewire extends Component
         return Asesores::where([
             ['status', 1], ['deleted', 0]
         ])->get();
+    }
+
+    public function getCountriesProperty()
+    {
+        return Countries::orderBy('name')->get();
     }
 }
