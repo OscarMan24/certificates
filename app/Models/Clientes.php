@@ -22,4 +22,14 @@ class Clientes extends Model
     public function documentos(){
         return $this->hasMany(ClienteDocumentos::class, 'cliente_id', 'id');
     }
+
+    public function creadoPor()
+    {
+        return $this->hasOne(User::class, 'id', 'created_user_id');
+    }
+
+    public function editadoPor()
+    {
+        return $this->hasOne(User::class, 'id', 'edit_user_id');
+    }
 }

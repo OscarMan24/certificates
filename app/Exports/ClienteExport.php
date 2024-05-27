@@ -42,7 +42,7 @@ class ClienteExport implements FromArray, ShouldAutoSize, WithStyles, WithColumn
         $array = [];
         $array[] =  [
             'Id', 'Nombre', 'Apellido', 'Tipo documento', 'Documento', 'Telefono', 'Correo', 'Genero', 'Fecha de nacimiento', 'Pais de nacimiento', 'Nivel de educacion', 
-            'Area de trabajo', 'Cargo actual', 'Aliado', 'Asesor', 'Estado'
+            'Area de trabajo', 'Cargo actual', 'Aliado', 'Asesor', 'Estado', 'Creado por', 'Fecha de creado', 'Editado por', 'Fecha de editado'
         ];
 
         $usuarios = Clientes::where([
@@ -51,7 +51,7 @@ class ClienteExport implements FromArray, ShouldAutoSize, WithStyles, WithColumn
             $query->where('status', 1);
         })->when($this->tipo == 3, function ($query, $search) {
             $query->where('status', 0);
-        })->with([])->get();
+        })->with(['creadoPor', 'editadoPor'])->get();
 
         if (!empty($usuarios)) {
             foreach ($usuarios as $item) {
@@ -71,7 +71,11 @@ class ClienteExport implements FromArray, ShouldAutoSize, WithStyles, WithColumn
                     'Cargo actual'  => $item->actual_charge,
                     'Aliado' => $item->aliado->name . ' ' . $item->aliado->last_name,
                     'Asesor' => $item->asesor->name . ' ' . $item->asesor->last_name,
-                    'Estado' => $item->status == 1 ? 'Activo' : 'Desactivado'
+                    'Estado' => $item->status == 1 ? 'Activo' : 'Desactivado',
+                    'Creado por' => isset($item->creadoPor) ? $item->creadoPor->name . ' ' . $item->creadoPor->last_name : '', 
+                    'Fecha de creado' => $item->created_at, 
+                    'Editado por' => isset($item->editadoPor) ? $item->editadoPor->name  . ' ' . $item->editadoPor->last_name : 'No', 
+                    'Fecha de editado' =>  isset($item->editadoPor) ? $item->updated_at : 'No'
                 );
             }
         }
