@@ -70,11 +70,11 @@
     <div class="certificado d-inline-flex" style="height: 99%; width: 100%; margin-top: 5px;">
         <h5 class="text-end " style="margin-top: 54px; margin-right: 96px">{{ $data['consecutivo'] }}
         </h5>
-        <h1 class="text-center justify-content-center certificado-titulo " style="margin-top: 300px">
+        <h1 class="text-center justify-content-center certificado-titulo " style="margin-top: 300px; margin-left: 40px">
             {{ Str::upper($data['nombre_cliente']) }}</h1>
 
         <h3 class="justify-content-center  "
-            style="margin-top: 10px; margin-left:610px; font-wight: 100;font-family: Helvetica-Oblique">
+            style="margin-top: 10px; margin-left:620px; font-wight: 100;font-family: Helvetica-Oblique">
             {{ $data['documento_identidad'] }}</h3>
       
         <div class="col-2 d-none" style="margin-left: 500px; margin-top: -5px;"> 
@@ -107,43 +107,43 @@
                
 
         <h2 class="justify-content-center text-center  "
-            style=" margin-top:103px; font-wight: 800; font-size: 44px ">
+            style=" margin-top:80px; font-wight: 800; font-size: 44px; margin-left: 40px ">
             {{ $data['nombre_curso'] }}
         </h2>
 
-        <h5 class="justify-content-center  "
+        <<h5 class="justify-content-center d-none "
             style="margin-left: 520px; font-wight: 600; font-size:14px; margin-top:30px">
-            {{ Str::upper($data['desde']) }}
+            { Str::upper($data['desde']) }}
         </h5>
-        <h5 class="justify-content-center  "
+        <h5 class="justify-content-center d-none "
           style="margin-left: 615px; font-wight: 600; font-size:14px; margin-top:-25px">
-            {{ Str::upper($data['hasta']) }}
+            { Str::upper($data['hasta']) }}
         </h5>
-        <h5 class="justify-content-center  "
+        <h5 class="justify-content-center d-none "
           style="margin-left: 678px; font-wight: 600; font-size:14px; margin-top:-8px">
-            {{ $data['horas'] }}
+            { $data['horas'] }}
         </h5>
-        <h5 class="justify-content-center  "
+        <h5 class="justify-content-center d-none "
             style="margin-left: 879px; font-wight: 600; font-size:14px; margin-top:9px">
-            {{ Str::upper($data['emitido']) }}
+            { Str::upper($data['emitido']) }}
         </h5>
 
         <div class="col-12 d-flex" style="display: flex; margin-top: 65px; margin-left:80px">
-            <div class="col-6">
+            <!--<div class="col-6">
                 <div>
-                    <img src="{{ asset('storage/representantes/' . $data['firma_representante_legal']) }}"
+                    <img src="{ asset('storage/representantes/' . $data['firma_representante_legal']) }}"
                         width="100" alt="firma-representante-legal" style="margin-left: 290px; margin-top:5px ">
                     <h3 class="justify-content-center text-center  "
                         style="margin-left: 50px; margin-top: 0px">
-                        {{ $data['nombre_representante_legal'] }}</h3>
+                        { $data['nombre_representante_legal'] }}</h3>
                 </div>
-            </div>
-            <div class="col-6" style="margin-left: 500px">
+            </div>-->
+            <div class="col-6" style="margin-left: 600px">
                 <div >
                     <img src="{{ asset('storage/instructores/' . $data['firma_instructor']) }}" width="100"
-                        alt="firma-representante-instructor" style="margin-left: 180px; margin-top: -95px ">
+                        alt="firma-representante-instructor" style="margin-left: 185px; margin-top: 120px ">
                     <h3 class="justify-content-center text-center  "
-                        style="margin-left: -140px; margin-top: -60px; margin-bottom: -300px">
+                        style="margin-left: -140px; margin-top: 57px; margin-bottom: -300px">
                         {{ $data['nombre_instructor'] }}
                         <h5 class="justify-content-center text-center "
                             style=" margin-top: -57px">
