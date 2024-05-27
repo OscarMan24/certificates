@@ -31,6 +31,7 @@ class ClientesLivewire extends Component
     public $readytoload = false;
 
     public $typeDocument, $document, $name, $lastName, $email, $phone, $birthdate;
+    public $celular, $address;
     public $asesorId, $aliadoId, $clienteId;
     public $export_to, $export_from;
     public $gender, $countryOfBirth, $educationLevel, $workArea, $actualCharge, $secondName, $secondLastName;
@@ -55,22 +56,24 @@ class ClientesLivewire extends Component
     {
         abort_if(Gate::denies('cliente.store'), Response::HTTP_FORBIDDEN, '403 Forbidden - No tiene permiso para realizar esta accion');
         $this->validate([
-            'typeDocument' => 'required',
-            'document' => 'required|numeric',
-            'name' => 'required|max:255|min:2',
-            'secondName' => 'nullable|max:120',            
-            'lastName' => 'required|max:255|min:2',
-            'secondLastName' => 'nullable|max:120',
-            'email' => 'nullable|email',
-            'phone' => 'nullable|phone:CO,AUTO',
-            'asesorId' => 'required|numeric',
-            'aliadoId' => 'required|numeric',
-            'birthdate' => 'required|date|before:today',
+            'typeDocument'      => 'required',
+            'document'          => 'required|numeric',
+            'name'              => 'required|max:255|min:2',
+            'secondName'        => 'nullable|max:120',            
+            'lastName'          => 'required|max:255|min:2',
+            'secondLastName'    => 'nullable|max:120',
+            'email'             => 'nullable|email',
+            'phone'             => 'nullable|phone:CO,AUTO',
+            'celular'           => 'nullable|phone:CO,AUTO',
+            'asesorId'          => 'required|numeric',
+            'aliadoId'          => 'required|numeric',
+            'birthdate'         => 'required|date|before:today',
             'gender'            => 'required',
             'countryOfBirth'    => 'nullable',
             'educationLevel'    => 'nullable',
             'workArea'          => 'nullable',
-            'actualCharge'      => 'nullable'
+            'actualCharge'      => 'nullable',
+            'address'           => 'nullable|max:120',
         ]);
         DB::beginTransaction();
         try {
@@ -89,6 +92,7 @@ class ClientesLivewire extends Component
                 $item->second_last_name = $this->secondLastName;
                 $item->email = $this->email;
                 $item->phone = $this->phone;
+                $item->celular = $this->celular;
                 $item->aliado_id = $this->aliadoId;
                 $item->asesor_id = $this->asesorId;
                 $item->birthdate = $this->birthdate;
@@ -96,6 +100,7 @@ class ClientesLivewire extends Component
                 $item->country_of_birth = $this->countryOfBirth;
                 $item->education_level = $this->educationLevel;
                 $item->work_area = $this->workArea;
+                $item->address = $this->address;
                 $item->actual_charge = $this->actualCharge;
                 $item->created_user_id = Auth::user()->id;
                 $item->save();
@@ -129,6 +134,8 @@ class ClientesLivewire extends Component
             $this->secondLastName = $this->Clientee->second_last_name;
             $this->email = $this->Clientee->email;
             $this->phone = $this->Clientee->phone;
+            $this->celular = $this->Clientee->celular;
+            $this->address = $this->Clientee->address;
             $this->birthdate = $this->Clientee->birthdate;
             $this->gender = $this->Clientee->gender;
             $this->countryOfBirth = $this->Clientee->country_of_birth;
@@ -154,6 +161,8 @@ class ClientesLivewire extends Component
             'secondLastName' => 'nullable|max:120',
             'email' => 'nullable|email',
             'phone' => 'nullable|phone:CO,AUTO',
+            'celular' => 'nullable|phone:CO,AUTO',
+            'address' => 'nullable|max:120',
             'asesorId' => 'required|numeric',
             'aliadoId' => 'required|numeric',
             'birthdate' => 'required|date|before:today',
@@ -179,6 +188,8 @@ class ClientesLivewire extends Component
                 $this->Clientee->second_last_name = $this->secondLastName;
                 $this->Clientee->email = $this->email;
                 $this->Clientee->phone = $this->phone;
+                $this->Clientee->celular = $this->celular;
+                $this->Clientee->address = $this->address;
                 $this->Clientee->asesor_id = $this->asesorId;
                 $this->Clientee->aliado_id = $this->aliadoId;
                 $this->Clientee->birthdate = $this->birthdate;
@@ -289,7 +300,7 @@ class ClientesLivewire extends Component
             ['email', 'LIKE', '%' . $this->search . '%'], ['status', 'LIKE', '%' . $this->search_status], ['deleted', 0]
         ])->orWhere([
             ['phone', 'LIKE', '%' . $this->search . '%'], ['status', 'LIKE', '%' . $this->search_status], ['deleted', 0]
-        ])->orderBy('id', 'desc')->paginate(12);
+        ])->with('documentos')->orderBy('id', 'desc')->paginate(12);
     }
 
     public function getClienteeProperty()

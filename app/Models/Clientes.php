@@ -18,4 +18,8 @@ class Clientes extends Model
     {
         return $this->hasOne(Asesores::class, 'id', 'asesor_id');
     }
+
+    public function documentos(){
+        return $this->hasMany(ClienteDocumentos::class, 'cliente_id', 'id');
+    }
 }

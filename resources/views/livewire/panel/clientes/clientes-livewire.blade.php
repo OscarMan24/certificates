@@ -52,7 +52,10 @@
                                     <th scope="col">{{ __('Documento') }}</th>
                                     <th scope="col">{{ __('Nombre') }}</th>
                                     <th scope="col">{{ __('Telefono') }}</th>
+                                    <th scope="col">{{ __('Celular') }}</th>
+                                    <th scope="col">{{ __('Direccion') }}</th>
                                     <th scope="col">{{ __('Correo') }}</th>
+                                    <th scope="col">{{ __('Documentos') }}</th>
                                     <th scope="col">{{ __('Estado') }}</th>
                                     @can(['cliente.edit', 'cliente.delete'])
                                         <th scope="col">{{ __('Accion') }}</th>
@@ -66,7 +69,54 @@
                                         <td>{{ $item->type_document . ' ' . $item->document }}</td>
                                         <td>{{ $item->name . ' ' . $item->second_name . ' ' . $item->last_name . ' ' . $item->second_last_name }}</td>
                                         <td>{{ $item->phone }}</td>
+                                        <td>{{ $item->celular }}</td>
+                                        <td>{{ $item->address }}</td>
                                         <td>{{ $item->email }}</td>
+                                        <td>
+                                            <div class="col-12">
+                                                <div class="col-6">
+                                                    D.P
+                                                    @php
+                                                        $found = false;
+                                                    @endphp
+
+                                                    @foreach ($item->documentos as $documento)
+                                                        @if ($documento->name == 'Documentos Personales' && $documento->status == 1)
+                                                            <i class="fas fa-clipboard-check text-success"></i>
+                                                            @php
+                                                                $found = true;
+                                                            @endphp
+                                                            @break
+                                                        @endif
+                                                    @endforeach
+
+                                                    @if (!$found)
+                                                        <i class="fas fa-times text-danger"></i>
+                                                    @endif
+                                                 
+                                                </div>
+                                                <div class="col-6">
+                                                    D.E
+                                                    @php
+                                                        $found = false;
+                                                    @endphp
+
+                                                    @foreach ($item->documentos as $documento)
+                                                        @if ($documento->name == 'Documentos Entrenamiento' && $documento->status == 1)
+                                                            <i class="fas fa-clipboard-check text-success"></i>
+                                                            @php
+                                                                $found = true;
+                                                            @endphp
+                                                            @break
+                                                        @endif
+                                                    @endforeach
+
+                                                    @if (!$found)
+                                                        <i class="fas fa-times text-danger"></i>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td>
                                             <span class="badge bg-{{ $item->status == 1 ? 'success' : 'secondary' }}">
                                                 {{ $item->status == 1 ? __('Activo') : __('Desactivado') }}

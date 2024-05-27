@@ -21,18 +21,12 @@
                             <div class="invalid-feedback ">{{ $message }} </div>
                         @enderror
 
-                        <div wire:loading.inline wire:target="documentosPersonales">
-                            <div class="col-12 my-1 text-center justify-content-center row">
-                                <div class="spinner-grow my-2" role="status">
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-12 row">
                             @if ($documentosPersonalesActual)
-                                <div class="col-6 mb-3 mt-3 text-center justify-content-center row">
+                                <div class="mb-3 mt-3 text-center justify-content-center row">
                                     <a href="{{ asset('/storage/Documentos/DocumentosPersonales/' . $documentosPersonalesActual) }}"
                                         target="_blank">
-                                        <div class="card bg-info">
+                                        <div class="card bg-primary">
                                             <div class="card-body text-white" style="">
                                                 <div class="col-12  text-center justify-content-center">
 
@@ -49,11 +43,18 @@
                                 </div>
                             @endif
                             @if ($this->documentosPersonales)
-                                <div
-                                    class="col-{{ $documentosPersonalesActual != '' ? 6 : 12 }} mb-3 mt-3 text-center justify-content-center row">
-                                    <i class="fas fa-clipboard-check text-success fa-4x"></i>
+                                <div class=" mb-3 mt-3 text-center justify-content-center row">
+                                    <i class="fas fa-clipboard-check text-primary fa-4x mb-2"></i>
+                                    <span class="font-weight-light">*Esperando a guardar para subir el archivo</span>
                                 </div>
                             @endif
+                        </div>
+
+                        <div wire:loading.inline wire:target="documentosPersonales">
+                            <div class="col-12 my-1 text-center justify-content-center row">
+                                <div class="spinner-grow my-2" role="status">
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -68,20 +69,13 @@
                         @error('documentosEntrenamiento')
                             <div class="invalid-feedback ">{{ $message }} </div>
                         @enderror
-
-                        <div wire:loading.inline wire:target="documentosEntrenamiento">
-                            <div class="col-12 my-1 text-center justify-content-center row">
-                                <div class="spinner-grow my-2" role="status">
-                                </div>
-                            </div>
-                        </div>
-
+                      
                         <div class="col-12 row">
                             @if ($documentosEntrenamientosActual)
-                                <div class="col-6 mb-3 mt-3 text-center justify-content-center row">
+                                <div class="mb-3 mt-3 text-center justify-content-center row">
                                     <a href="{{ asset('/storage/Documentos/DocumentosEntrenamiento/' . $documentosEntrenamientosActual) }}"
                                         target="_blank">
-                                        <div class="card bg-info">
+                                        <div class="card bg-primary">
                                             <div class="card-body text-white" style="">
                                                 <div class="col-12  text-center justify-content-center">
 
@@ -98,11 +92,18 @@
                                 </div>
                             @endif
                             @if ($this->documentosEntrenamiento)
-                                <div
-                                    class="col-{{ $documentosEntrenamientosActual != '' ? 6 : 12 }} mb-3 mt-3 text-center justify-content-center row">
-                                    <i class="fas fa-clipboard-check text-success fa-4x"></i>
+                                <div class="mb-3 mt-3 text-center justify-content-center row">
+                                    <i class="fas fa-clipboard-check text-primary fa-4x mb-2"></i>
+                                    <span class="font-weight-light">*Esperando a guardar para subir el archivo</span>
                                 </div>
                             @endif
+                        </div>
+
+                        <div wire:loading.inline wire:target="documentosEntrenamiento">
+                            <div class="col-12 my-1 text-center justify-content-center row">
+                                <div class="spinner-grow my-2" role="status">
+                                </div>
+                            </div>
                         </div>
                     </div>
 

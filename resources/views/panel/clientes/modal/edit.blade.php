@@ -101,15 +101,35 @@
                         @enderror
                     </div>
 
-                    <div class="col-md-6 col-12 mb-2">
-                        <span class="mb-1">{{ __('Telefono - Celular') }}</span>
+                   <div class="col-md-6 col-12 mb-2">
+                        <span class="mb-1">{{ __('Direccion') }}</span>
+                        <input type="text" class="form-control @error('address') is-invalid @enderror"
+                            placeholder="{{ __('Direccion') }}" wire:model.defer="address" wire:target="store"
+                            wire:loading.attr="disabled">
+                        @error('address')
+                            <div class="invalid-feedback ">{{ $message }} </div>
+                        @enderror
+                    </div>  
+
+                     <div class="col-md-6 col-12 mb-2">
+                        <span class="mb-1">{{ __('Telefono ') }}</span>
                         <input type="tel" class="form-control @error('phone') is-invalid @enderror"
-                            placeholder="{{ __('Telefono - Celular') }}" wire:model.defer="phone"
-                            wire:target="actualizar" wire:loading.attr="disabled">
+                            placeholder="{{ __('Telefono') }}" wire:model.defer="phone" wire:target="store"
+                            wire:loading.attr="disabled">
                         @error('phone')
                             <div class="invalid-feedback ">{{ $message }} </div>
                         @enderror
-                    </div>
+                    </div>  
+
+                    <div class="col-md-6 col-12 mb-2">
+                        <span class="mb-1">{{ __('Celular') }}</span>
+                        <input type="tel" class="form-control @error('celular') is-invalid @enderror"
+                            placeholder="{{ __('Celular') }}" wire:model.defer="celular" wire:target="store"
+                            wire:loading.attr="disabled">
+                        @error('celular')
+                            <div class="invalid-feedback ">{{ $message }} </div>
+                        @enderror
+                    </div>   
 
                     <div class="col-lg-6 col-md-12 col-12 mb-3">
                         <span>{{ __('Genero') }}</span>
